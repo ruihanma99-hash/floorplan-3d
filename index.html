@@ -7,7 +7,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="theme-color" content="#fffdf9">
-<title>100G · V12 三处飘窗结构</title>
+<title>100G · V13 主卧西侧竖向门洞修正</title>
 <style>
 :root{
   --bg:#f3efe7; --paper:#f7f4ee; --panel:#fffdf9; --line:#e3dccf; --ink:#2b2824; --muted:#8a8174;
@@ -228,7 +228,7 @@ main.drawer-panel #fab{opacity:0;visibility:hidden}
       <button class="btn chip" id="tgLib" data-en="◧ Library">◧ 家具库</button>
       <button class="btn chip" id="tgPanel" data-en="Properties ◨">属性 ◨</button>
     </div>
-    <div class="brand"><b data-en="3BR 2LR 2BA · Interior Design">100G · V12 三处飘窗及墙垛</b><span id="subtitle">原始户型 1:60 · 尺寸单位 mm</span></div>
+    <div class="brand"><b data-en="3BR 2LR 2BA · Interior Design">100G · V13 主卧竖向门洞及通道</b><span id="subtitle">原始户型 1:60 · 尺寸单位 mm</span></div>
     <div class="grp seg" id="viewSeg" title="切换 2D / 3D (T)" data-en-title="Switch 2D / 3D (T)">
       <span class="pill"></span>
       <button class="btn" data-view="2d" data-en="2D Plan">2D 平面</button>
@@ -434,10 +434,10 @@ const WALLS=[
  [7900,-180,8310,0,'e'],[9210,-180,9730,0,'e'],
  [7900,0,8080,1900,'n'],[9550,0,9730,5900,'e'],
  [8080,1900,8320,2080,'n'],[9120,1900,9550,2080,'n'], // 主卫南墙靠西门洞，向北内开
- // 主卧门与主卫门分别位于东西走向过道的南北两侧，门洞正对，之间是独立过道。
+ // 用户最终确认：主卧门在西侧竖向墙、向东内开；主卫门在南侧横向墙、向北内开。
  [3350,2600,3980,2780,'n'],[4780,2600,6300,2780,'n'],
- [3350,2600,3530,5700,'n'],[6300,2600,6480,5700,'n'],
- [6550,2500,6730,3100,'n'],[6550,3900,6730,5900,'n'], // 主卧入口：西侧靠北、从过道向东开入
+ [3350,2600,3530,5700,'n'],[6300,3900,6480,5700,'n'], // 打通通向主卧西侧门的上段过道，避免墙挡住门
+ [6550,2680,6730,3100,'n'],[6550,3900,6730,5900,'n'], // 主卧门西侧竖墙800mm洞，向东内开
  [6730,2500,9550,2680,'n'], // 主卧北墙完整，移除V10误设门洞
  // SOUTH WALLS of both bedrooms: window recesses plus visible protruding structural piers
  [3350,5700,3740,5880,'e'],[5630,5700,6300,5880,'e'],
@@ -480,7 +480,7 @@ const DOORS=[
  {name:'公卫门（待复尺）',rect:[4140,1900,4920,2080],h:[4140,1900],c:[1,0],o:[0,1],len:780},
  {name:'书房门（待复尺）',rect:[6000,1900,6850,2080],h:[6000,1900],c:[1,0],o:[0,1],len:850},
  {name:'次卧门（待复尺）',rect:[3980,2600,4780,2780],h:[3980,2780],c:[1,0],o:[0,1],len:800},
- {name:'主卧门（用户标注60%/52%，西侧向内开）',rect:[6550,3100,6730,3900],h:[6730,3100],c:[0,1],o:[1,0],len:800},
+ {name:'主卧门（西侧竖墙，向东内开）',rect:[6550,3100,6730,3900],h:[6730,3100],c:[0,1],o:[1,0],len:800},
  {name:'主卫门（用户标注73%/51%，南侧向内开）',rect:[8320,1900,9120,2080],h:[8320,1900],c:[1,0],o:[0,-1],len:800}
 ];
 const SLIDES=[{rect:[900,1900,2350,2080],v:false}];
@@ -492,7 +492,7 @@ const ROOMS=[
  {id:'study',name:'书房/衣帽间',poly:R(5300,-650,7720,1900),mat:'wood',at:[6440,220]},
  {id:'mbath',name:'主卫',poly:R(8080,0,9550,1900),mat:'antislip',at:[8820,850]},
  {id:'living',name:'客餐厅',poly:R(-1450,2080,3350,6100),mat:'tile800',at:[900,3950]},
- {id:'hall',name:'东西向过道及主卧入口转折',poly:[[3350,2080],[5140,2080],[5140,1900],[9550,1900],[9550,2500],[6730,2500],[6730,3900],[6300,3900],[6300,2600],[3350,2600]],mat:'tile800',at:[6990,2230]},
+ {id:'hall',name:'东西向过道及主卧西侧入口',poly:[[3350,2080],[5140,2080],[5140,1900],[9550,1900],[9550,2500],[6730,2500],[6730,3900],[6300,3900],[6300,2600],[3350,2600]],mat:'tile800',at:[6990,2230]},
  {id:'secondary',name:'次卧',poly:R(3530,2780,6300,5700),mat:'wood',at:[4870,3940]},
  {id:'master',name:'主卧',poly:R(6730,2680,9550,5900),mat:'wood',at:[8260,4050]},
  {id:'balcony',name:'原阳台（右侧保留墙垛）',poly:[[-1450,6100],[2220,6100],[2220,6460],[2500,6460],[2500,7450],[-1450,7450]],mat:'tile800',at:[400,6790]},
@@ -575,7 +575,7 @@ function defaultState(){
   return {furniture:defaultFurniture(), rooms, demolished:[], measures:[]};
 }
 
-const STORE = 'ruihan-100g-three-bays-v12';
+const STORE = 'ruihan-100g-master-west-door-clearance-v13';
 function load(){
   try { const s = JSON.parse(localStorage.getItem(STORE)); if (s && Array.isArray(s.furniture)) return fixState(s); } catch(e) {}
   return null;
@@ -875,7 +875,7 @@ function renderDims(){
  out+=segment(-1200,160,-300,160,'入户门900 模型','pending');
  out+=segment(-210,550,-210,0,'玄关北缩550 模型','pending',true);
  out+=tag(-420,1710,'靠厨房玄关柜350×1100','pending',113);
- out+=tag(6720,4120,'主卧门：西侧向内开（用户标注60%）','measured',116);
+ out+=tag(6810,4200,'主卧门：西侧竖墙 / 向东内开','measured',118);
  out+=tag(8720,1750,'主卫门：南侧向内开（用户标注73%）','measured',116);
  out+=tag(460,7870,'阳台参考 4150×1350 mm（图三）','plan',140);
  out+=tag(2220,6570,'右侧墙垛/凹位','pending',123);
