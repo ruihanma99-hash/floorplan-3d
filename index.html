@@ -7,7 +7,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="theme-color" content="#fffdf9">
-<title>100G · V8 阳台墙垛和飘窗核对</title>
+<title>100G · V9 主卧及主卫门修正</title>
 <style>
 :root{
   --bg:#f3efe7; --paper:#f7f4ee; --panel:#fffdf9; --line:#e3dccf; --ink:#2b2824; --muted:#8a8174;
@@ -228,7 +228,7 @@ main.drawer-panel #fab{opacity:0;visibility:hidden}
       <button class="btn chip" id="tgLib" data-en="◧ Library">◧ 家具库</button>
       <button class="btn chip" id="tgPanel" data-en="Properties ◨">属性 ◨</button>
     </div>
-    <div class="brand"><b data-en="3BR 2LR 2BA · Interior Design">100G · V8 阳台墙垛/飘窗/尺寸</b><span id="subtitle">原始户型 1:60 · 尺寸单位 mm</span></div>
+    <div class="brand"><b data-en="3BR 2LR 2BA · Interior Design">100G · V9 主卧门/主卫门修正</b><span id="subtitle">原始户型 1:60 · 尺寸单位 mm</span></div>
     <div class="grp seg" id="viewSeg" title="切换 2D / 3D (T)" data-en-title="Switch 2D / 3D (T)">
       <span class="pill"></span>
       <button class="btn" data-view="2d" data-en="2D Plan">2D 平面</button>
@@ -431,14 +431,13 @@ const WALLS=[
  [4960,1720,5300,1900,'n'],
  // ensuite on study east side, master directly underneath
  [7900,-180,8310,0,'e'],[9210,-180,9730,0,'e'],
- [7900,0,8080,850,'n'],[7900,1500,8080,2300,'n'],[9550,0,9730,5900,'e'],
- [8080,2500,8300,2680,'n'],[8300,2500,8480,2680,'n'], // 卫生间南墙改为完整隔墙
- [7900,2300,8080,2500,'n'], // 主卫西侧门洞预留850-1500，最终开向待核
+ [7900,0,8080,2500,'n'],[9550,0,9730,5900,'e'],
+ [8080,2500,8570,2680,'n'],[9370,2500,9730,2680,'n'], // 主卫南侧留800门洞，向下连接主卧
  // 过道沿公卫/书房南侧延伸，在次卧和主卧之间转入，主卧门位于走道东端（西侧墙）。
  [3350,2600,3980,2780,'n'],[4780,2600,6300,2780,'n'],
  [3350,2600,3530,5700,'n'],[6300,2600,6480,5700,'n'],
- [6550,2500,6730,3250,'n'],[6550,4070,6730,5900,'n'], // 主卧西侧门洞，位于过道尽头
- [6730,2500,8080,2680,'n'], // 主卧北侧隔墙，不再误开主卧门
+ [6550,2500,6730,5900,'n'], // 主卧西侧完整墙，不再在西墙开门
+ [6730,2500,6820,2680,'n'],[7620,2500,8080,2680,'n'], // 主卧入口在北侧近西端，过道尽头
  // SOUTH WALLS of both bedrooms: window recesses plus visible protruding structural piers
  [3350,5700,3740,5880,'e'],[5630,5700,6300,5880,'e'],
  [6550,5900,7010,6080,'e'],[8700,5900,9730,6080,'e'],
@@ -480,8 +479,8 @@ const DOORS=[
  {name:'公卫门（待复尺）',rect:[4140,1900,4920,2080],h:[4140,1900],c:[1,0],o:[0,1],len:780},
  {name:'书房门（待复尺）',rect:[6000,1900,6850,2080],h:[6000,1900],c:[1,0],o:[0,1],len:850},
  {name:'次卧门（待复尺）',rect:[3980,2600,4780,2780],h:[3980,2780],c:[1,0],o:[0,1],len:800},
- {name:'主卧门（走道尽端，门向待核）',rect:[6550,3250,6730,4070],h:[6730,3250],c:[0,1],o:[1,0],len:820},
- {name:'主卫门（西侧门洞，待核）',rect:[7900,850,8080,1500],h:[8080,850],c:[0,1],o:[1,0],len:650}
+ {name:'主卧门（北侧西端，从过道进入）',rect:[6820,2500,7620,2680],h:[6820,2680],c:[1,0],o:[0,1],len:800},
+ {name:'主卫门（南侧，通往主卧）',rect:[8570,2500,9370,2680],h:[9370,2680],c:[-1,0],o:[0,1],len:800}
 ];
 const SLIDES=[{rect:[900,1900,2350,2080],v:false}];
 const R=(x0,y0,x1,y1)=>[[x0,y0],[x1,y0],[x1,y1],[x0,y1]];
@@ -574,7 +573,7 @@ function defaultState(){
   return {furniture:defaultFurniture(), rooms, demolished:[], measures:[]};
 }
 
-const STORE = 'ruihan-100g-reference-balcony-piers-v8';
+const STORE = 'ruihan-100g-master-doors-v9';
 function load(){
   try { const s = JSON.parse(localStorage.getItem(STORE)); if (s && Array.isArray(s.furniture)) return fixState(s); } catch(e) {}
   return null;
@@ -873,8 +872,8 @@ function renderDims(){
  out+=segment(-1200,160,-300,160,'入户门900 模型','pending');
  out+=segment(-210,550,-210,0,'玄关北缩550 模型','pending',true);
  out+=tag(-420,1710,'靠厨房玄关柜350×1100','pending',113);
- out+=tag(6650,4400,'主卧门在走道尽端','pending',133);
- out+=tag(7760,1680,'主卫西侧门待核','pending',126);
+ out+=tag(7210,2870,'主卧北侧入门（靠过道尽端）','plan',120);
+ out+=tag(9010,2830,'主卫南侧门通主卧','plan',120);
  out+=tag(460,7870,'阳台参考 4150×1350 mm（图三）','plan',140);
  out+=tag(2220,6570,'右侧墙垛/凹位','pending',123);
  out+=tag(-1130,6490,'左侧短墙','pending',120);
