@@ -7,7 +7,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="theme-color" content="#fffdf9">
-<title>100G · V11 按用户标注修正主卧主卫门</title>
+<title>100G · V12 三处飘窗结构</title>
 <style>
 :root{
   --bg:#f3efe7; --paper:#f7f4ee; --panel:#fffdf9; --line:#e3dccf; --ink:#2b2824; --muted:#8a8174;
@@ -228,7 +228,7 @@ main.drawer-panel #fab{opacity:0;visibility:hidden}
       <button class="btn chip" id="tgLib" data-en="◧ Library">◧ 家具库</button>
       <button class="btn chip" id="tgPanel" data-en="Properties ◨">属性 ◨</button>
     </div>
-    <div class="brand"><b data-en="3BR 2LR 2BA · Interior Design">100G · V11 用户标注主卧主卫门</b><span id="subtitle">原始户型 1:60 · 尺寸单位 mm</span></div>
+    <div class="brand"><b data-en="3BR 2LR 2BA · Interior Design">100G · V12 三处飘窗及墙垛</b><span id="subtitle">原始户型 1:60 · 尺寸单位 mm</span></div>
     <div class="grp seg" id="viewSeg" title="切换 2D / 3D (T)" data-en-title="Switch 2D / 3D (T)">
       <span class="pill"></span>
       <button class="btn" data-view="2d" data-en="2D Plan">2D 平面</button>
@@ -425,6 +425,7 @@ const WALLS=[
  // study adjacent to the public bath: west wall x5140-5300, north balcony/terrace sill; south door
  [5140,-650,5300,1900,'n'],
  [5140,-830,5510,-650,'e'],[7210,-830,7900,-650,'e'],
+ [5510,-1130,5690,-650,'n'],[7030,-1130,7210,-650,'n'],
  [7720,-650,7900,1900,'n'],
  [5300,1900,6000,2080,'n'],[6850,1900,7900,2080,'n'],
  // bath-to-study corner/post; DO NOT create a 1m empty buffer
@@ -467,7 +468,7 @@ const WALLS=[
 const WINS=[
  [1050,-180,2520,0], // kitchen northern external glazing
  [3750,-180,4630,0], // public bathroom exterior
- [5510,-830,7210,-650], // study outer bay window
+ [5690,-1130,7030,-950], // study north bay window
  [8310,-180,9210,0], // ensuite exterior
  // bay windows have their own outward projection (not flat wall glass)
  [3740,5700,5630,5880], // secondary
@@ -495,6 +496,7 @@ const ROOMS=[
  {id:'secondary',name:'次卧',poly:R(3530,2780,6300,5700),mat:'wood',at:[4870,3940]},
  {id:'master',name:'主卧',poly:R(6730,2680,9550,5900),mat:'wood',at:[8260,4050]},
  {id:'balcony',name:'原阳台（右侧保留墙垛）',poly:[[-1450,6100],[2220,6100],[2220,6460],[2500,6460],[2500,7450],[-1450,7450]],mat:'tile800',at:[400,6790]},
+ {id:'bay-study',name:'书房北侧飘窗（待复尺）',poly:R(5510,-1130,7210,-650),mat:'marble',counted:false},
  {id:'bay-secondary',name:'次卧飘窗（深约600待核）',poly:R(3740,5700,5630,6300),mat:'marble',counted:false},
  {id:'bay-master',name:'主卧飘窗（深约570待核）',poly:R(7010,5900,8700,6470),mat:'marble',counted:false}
 ];
@@ -573,7 +575,7 @@ function defaultState(){
   return {furniture:defaultFurniture(), rooms, demolished:[], measures:[]};
 }
 
-const STORE = 'ruihan-100g-user-marked-doors-v11';
+const STORE = 'ruihan-100g-three-bays-v12';
 function load(){
   try { const s = JSON.parse(localStorage.getItem(STORE)); if (s && Array.isArray(s.furniture)) return fixState(s); } catch(e) {}
   return null;
@@ -853,6 +855,7 @@ function renderDims(){
    ['secondary','次卧 实测2778×2946','measured'],
    ['master','主卧 实测3130×3330','measured'],
    ['balcony','原阳台 图二4150×1350','plan'],
+   ['bay-study','书房飘窗 模型1700×480 待复尺','pending'],
    ['bay-secondary','次卧飘窗 深约600待复尺','pending'],
    ['bay-master','主卧飘窗 深约570待复尺','pending']
  ];
@@ -877,8 +880,9 @@ function renderDims(){
  out+=tag(460,7870,'阳台参考 4150×1350 mm（图三）','plan',140);
  out+=tag(2220,6570,'右侧墙垛/凹位','pending',123);
  out+=tag(-1130,6490,'左侧短墙','pending',120);
- out+=tag(4620,6140,'次卧飘窗：深约600 mm（图三）','plan',115);
- out+=tag(7930,6490,'主卧飘窗：深约570 mm（图三）','plan',115);
+ out+=tag(6420,-1410,'书房飘窗：模型深480mm，待复尺','pending',120);
+ out+=tag(4620,6140,'次卧飘窗：深约600mm，待复尺','pending',115);
+ out+=tag(7930,6490,'主卧飘窗：深约570mm，待复尺','pending',115);
  out+=tag(5100,7910,'原图墙垛宽度尚未可靠识别，灰色墙为位置示意','pending',133);
  out+=tag(470,8140,'左：实墙；阳台净尺寸与柱/墙垛待复尺','pending',150);
  out+=tag(5200,8470,'绿色=实测记录 蓝灰=图二方案 棕色=模型/待复尺；非施工放样','pending',144);
