@@ -7,7 +7,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="theme-color" content="#fffdf9">
-<title>我的房屋 · 第2版家具及尺寸校核</title>
+<title>100G户型 · V3结构核对版</title>
 <style>
 :root{
   --bg:#f3efe7; --paper:#f7f4ee; --panel:#fffdf9; --line:#e3dccf; --ink:#2b2824; --muted:#8a8174;
@@ -228,7 +228,7 @@ main.drawer-panel #fab{opacity:0;visibility:hidden}
       <button class="btn chip" id="tgLib" data-en="◧ Library">◧ 家具库</button>
       <button class="btn chip" id="tgPanel" data-en="Properties ◨">属性 ◨</button>
     </div>
-    <div class="brand"><b data-en="3BR 2LR 2BA · Interior Design">我的房屋 · 平面/3D校核草稿</b><span id="subtitle">原始户型 1:60 · 尺寸单位 mm</span></div>
+    <div class="brand"><b data-en="3BR 2LR 2BA · Interior Design">100G · V3结构校核（暂不摆家具）</b><span id="subtitle">原始户型 1:60 · 尺寸单位 mm</span></div>
     <div class="grp seg" id="viewSeg" title="切换 2D / 3D (T)" data-en-title="Switch 2D / 3D (T)">
       <span class="pill"></span>
       <button class="btn" data-view="2d" data-en="2D Plan">2D 平面</button>
@@ -417,8 +417,8 @@ const WALLS = [
   [3650,0,3830,1050,'n'],[3650,1850,3830,2250,'n'],
   [3830,2050,5100,2250,'n'],[4800,0,4980,2050,'n'],
   // 书房：上中右 2505 × 2434；保留飘窗
-  [5100,0,5280,2440,'n'],[5280,2440,6000,2620,'n'],
-  [6900,2440,7550,2620,'n'],[7550,0,7730,2440,'n'],
+  [5100,0,5280,2434,'n'],[5280,2434,6000,2614,'n'],
+  [6900,2434,7605,2614,'n'],[7605,0,7785,2434,'n'],
   // 玄关、内走道隔断；入口无多余玄关门
   [7800,0,7980,1850,'n'],[7800,2650,7980,3150,'n'],
   // 客厅和餐厅一体、无阳台隔门
@@ -443,7 +443,7 @@ const WINS = [
 const DOORS = [
   {name:'入户门',rect:[11600,850,11800,1750],h:[11600,1750],c:[0,-1],o:[-1,0],len:900,entry:true},
   {name:'客卫门',rect:[3650,1050,3830,1850],h:[3650,1850],c:[0,-1],o:[-1,0],len:800},
-  {name:'书房门',rect:[6000,2440,6900,2620],h:[6000,2440],c:[1,0],o:[0,1],len:900},
+  {name:'书房门',rect:[6000,2434,6900,2614],h:[6000,2434],c:[1,0],o:[0,1],len:900},
   {name:'主卧门',rect:[6100,3150,6900,3330],h:[6100,3150],c:[1,0],o:[0,1],len:800},
   {name:'次卧门',rect:[9400,3450,10200,3630],h:[9400,3450],c:[1,0],o:[0,1],len:800},
 ];
@@ -454,7 +454,7 @@ const R = (x0,y0,x1,y1) => [[x0,y0],[x1,y0],[x1,y1],[x0,y1]];
 const ROOMS = [
   {id:'kitchen', name:'厨房', poly:R(0,0,3400,2050), mat:'tile600',at:[1650,1150]},
   {id:'gbath', name:'公卫', poly:R(3830,0,4800,2050), mat:'antislip',at:[4310,1150]},
-  {id:'study', name:'书房/衣帽间', poly:R(5280,0,7550,2440), mat:'wood',at:[6410,1300]},
+  {id:'study', name:'书房/衣帽间（校核）', poly:R(5100,0,7605,2434), mat:'wood',at:[6410,1300]},
   {id:'entry', name:'玄关/入户', poly:R(7980,0,11600,2250), mat:'tile800',at:[10200,1100]},
   {id:'hall', name:'走道', poly:[[3600,2250],[5280,2250],[5280,2620],[7980,2620],[7980,2250],[11600,2250],[11600,3450],[8690,3450],[8690,3150],[5380,3150],[5380,3850],[5200,3850],[5200,2250]],mat:'tile800',at:[8050,2850]},
   {id:'living', name:'客餐厅/连通阳台', poly:[[0,2250],[5200,2250],[5200,6600],[0,6600]],mat:'tile800',at:[2650,4150]},
@@ -533,10 +533,10 @@ function defaultFurniture(){ return [
 
 function defaultState(){
   const rooms = {}; ROOMS.forEach(r => rooms[r.id] = {name:r.name, mat:r.mat});
-  return {furniture:defaultFurniture(), rooms, demolished:[], measures:[]};
+  return {furniture:[], rooms, demolished:[], measures:[]};
 }
 
-const STORE = 'ruihan-100g-floorplan-draft-v2';
+const STORE = 'ruihan-100g-floorplan-review-v3';
 function load(){
   try { const s = JSON.parse(localStorage.getItem(STORE)); if (s && Array.isArray(s.furniture)) return fixState(s); } catch(e) {}
   return null;
@@ -792,10 +792,10 @@ function renderDims(){
   const line = (x1,y1,x2,y2,label) => `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" ${LS}/><text x="${(x1+x2)/2}" y="${(y1+y2)/2-85}" text-anchor="middle" font-size="180" fill="${DC}">${label}</text>`;
   // 仅显示此前有净尺寸记录的房间，其他位置不生成虚假的精确尺寸
   $('#gDims').innerHTML =
-    line(5380,7080,8510,7080,'主卧宽 3130') +
-    line(8690,7320,11468,7320,'次卧宽 2778') +
-    line(5280,-530,7550,-530,'书房示意宽（待校 2505）') +
-    `<text x="400" y="7350" fill="#a05342" font-size="190">校核草图：门窗、墙垛、房间边界仍待复尺</text>`;
+    line(5380,7080,8510,7080,'主卧净宽 3130') +
+    line(8690,7320,11468,7320,'次卧净宽 2778') +
+    line(5100,-530,7605,-530,'书房净宽 2505（位置待核）') +
+    `<text x="400" y="7350" fill="#a05342" font-size="190">结构校核版：两卫位置、门洞及墙垛尚未完成核对</text>`;
   $('#gDims').setAttribute('display', ui.layers.dims ? 'inline' : 'none');
 }
 
@@ -854,7 +854,7 @@ function renderAll(){
 
 function updateHeader(){
   const tot = ROOMS.filter(r => r.counted !== false).reduce((a,r) => a + area(r.poly), 0);
-  $('#subtitle').textContent = tr(`示意模型面积 ${fmt(tot)} m²（非实测） · 单位 mm · 待校核`, `Draft model area ${fmt(tot)} m² (not measured) · Units: mm`);
+  $('#subtitle').textContent = tr(`模型面积 ${fmt(tot)} m²（不是100㎡建筑面积） · 两卫待核 · 单位mm`, `Draft model area ${fmt(tot)} m² (not measured) · Units: mm`);
   $('#undo').disabled = !undoStack.length; $('#redo').disabled = !redoStack.length;
   $('#undo').style.opacity = undoStack.length ? 1 : .4; $('#redo').style.opacity = redoStack.length ? 1 : .4;
 }
