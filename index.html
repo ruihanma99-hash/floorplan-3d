@@ -7,7 +7,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="theme-color" content="#fffdf9">
-<title>100G · V9 主卧及主卫门修正</title>
+<title>100G · V10 主卧和主卫隔过道相对</title>
 <style>
 :root{
   --bg:#f3efe7; --paper:#f7f4ee; --panel:#fffdf9; --line:#e3dccf; --ink:#2b2824; --muted:#8a8174;
@@ -228,7 +228,7 @@ main.drawer-panel #fab{opacity:0;visibility:hidden}
       <button class="btn chip" id="tgLib" data-en="◧ Library">◧ 家具库</button>
       <button class="btn chip" id="tgPanel" data-en="Properties ◨">属性 ◨</button>
     </div>
-    <div class="brand"><b data-en="3BR 2LR 2BA · Interior Design">100G · V9 主卧门/主卫门修正</b><span id="subtitle">原始户型 1:60 · 尺寸单位 mm</span></div>
+    <div class="brand"><b data-en="3BR 2LR 2BA · Interior Design">100G · V10 主卧主卫对门/东西过道</b><span id="subtitle">原始户型 1:60 · 尺寸单位 mm</span></div>
     <div class="grp seg" id="viewSeg" title="切换 2D / 3D (T)" data-en-title="Switch 2D / 3D (T)">
       <span class="pill"></span>
       <button class="btn" data-view="2d" data-en="2D Plan">2D 平面</button>
@@ -431,13 +431,13 @@ const WALLS=[
  [4960,1720,5300,1900,'n'],
  // ensuite on study east side, master directly underneath
  [7900,-180,8310,0,'e'],[9210,-180,9730,0,'e'],
- [7900,0,8080,2500,'n'],[9550,0,9730,5900,'e'],
- [8080,2500,8570,2680,'n'],[9370,2500,9730,2680,'n'], // 主卫南侧留800门洞，向下连接主卧
- // 过道沿公卫/书房南侧延伸，在次卧和主卧之间转入，主卧门位于走道东端（西侧墙）。
+ [7900,0,8080,1900,'n'],[9550,0,9730,5900,'e'],
+ [8080,1900,8400,2080,'n'],[9200,1900,9550,2080,'n'], // 主卫门在东西走向的过道北侧
+ // 主卧门与主卫门分别位于东西走向过道的南北两侧，门洞正对，之间是独立过道。
  [3350,2600,3980,2780,'n'],[4780,2600,6300,2780,'n'],
  [3350,2600,3530,5700,'n'],[6300,2600,6480,5700,'n'],
  [6550,2500,6730,5900,'n'], // 主卧西侧完整墙，不再在西墙开门
- [6730,2500,6820,2680,'n'],[7620,2500,8080,2680,'n'], // 主卧入口在北侧近西端，过道尽头
+ [6730,2500,8400,2680,'n'],[9200,2500,9550,2680,'n'], // 主卧门在东西向过道南侧，正对主卫门
  // SOUTH WALLS of both bedrooms: window recesses plus visible protruding structural piers
  [3350,5700,3740,5880,'e'],[5630,5700,6300,5880,'e'],
  [6550,5900,7010,6080,'e'],[8700,5900,9730,6080,'e'],
@@ -479,8 +479,8 @@ const DOORS=[
  {name:'公卫门（待复尺）',rect:[4140,1900,4920,2080],h:[4140,1900],c:[1,0],o:[0,1],len:780},
  {name:'书房门（待复尺）',rect:[6000,1900,6850,2080],h:[6000,1900],c:[1,0],o:[0,1],len:850},
  {name:'次卧门（待复尺）',rect:[3980,2600,4780,2780],h:[3980,2780],c:[1,0],o:[0,1],len:800},
- {name:'主卧门（北侧西端，从过道进入）',rect:[6820,2500,7620,2680],h:[6820,2680],c:[1,0],o:[0,1],len:800},
- {name:'主卫门（南侧，通往主卧）',rect:[8570,2500,9370,2680],h:[9370,2680],c:[-1,0],o:[0,1],len:800}
+ {name:'主卧门（过道南侧，正对主卫）',rect:[8400,2500,9200,2680],h:[8400,2680],c:[1,0],o:[0,1],len:800},
+ {name:'主卫门（过道北侧，正对主卧）',rect:[8400,1900,9200,2080],h:[9200,1900],c:[-1,0],o:[0,-1],len:800}
 ];
 const SLIDES=[{rect:[900,1900,2350,2080],v:false}];
 const R=(x0,y0,x1,y1)=>[[x0,y0],[x1,y0],[x1,y1],[x0,y1]];
@@ -489,9 +489,9 @@ const ROOMS=[
  {id:'kitchen',name:'厨房',poly:R(180,0,3050,1900),mat:'tile600',at:[1520,920]},
  {id:'gbath',name:'公卫',poly:R(3470,0,4960,1900),mat:'antislip',at:[4180,920]},
  {id:'study',name:'书房/衣帽间',poly:R(5300,-650,7720,1900),mat:'wood',at:[6440,220]},
- {id:'mbath',name:'主卫',poly:R(8080,0,9550,2500),mat:'antislip',at:[8820,1000]},
+ {id:'mbath',name:'主卫',poly:R(8080,0,9550,1900),mat:'antislip',at:[8820,850]},
  {id:'living',name:'客餐厅',poly:R(-1450,2080,3350,6100),mat:'tile800',at:[900,3950]},
- {id:'hall',name:'卧室过道（向主卧门转折）',poly:[[3350,2080],[5140,2080],[5140,1900],[7900,1900],[7900,2500],[6730,2500],[6730,4070],[6300,4070],[6300,2600],[3350,2600]],mat:'tile800',at:[5590,2320]},
+ {id:'hall',name:'东西向过道（主卧/主卫对门）',poly:[[3350,2080],[5140,2080],[5140,1900],[9550,1900],[9550,2500],[6730,2500],[6730,2600],[3350,2600]],mat:'tile800',at:[7040,2230]},
  {id:'secondary',name:'次卧',poly:R(3530,2780,6300,5700),mat:'wood',at:[4870,3940]},
  {id:'master',name:'主卧',poly:R(6730,2680,9550,5900),mat:'wood',at:[8260,4050]},
  {id:'balcony',name:'原阳台（右侧保留墙垛）',poly:[[-1450,6100],[2220,6100],[2220,6460],[2500,6460],[2500,7450],[-1450,7450]],mat:'tile800',at:[400,6790]},
@@ -555,8 +555,8 @@ function defaultFurniture(){return [
  F('desk','书房升降桌1000×600',6470,-220,1000,600),
  F('sofa','书房沙发床（收起）',7250,870,910,1800,0,'#d9d5d0'),
  F('shower','主卫淋浴',8780,600,900,900),
- F('toilet','主卫马桶',9310,1570,400,700),
- F('vanity','主卫洗手台',8360,2150,650,450),
+ F('toilet','主卫马桶',9330,1190,400,650),
+ F('vanity','主卫洗手台',8380,1490,650,450),
  F('tvstand','100寸电视墙/柜（试排）',3100,4450,450,2750,90),
  F('sofa','三人电动沙发（试排）',500,4250,2450,950,90,'#d6d4d0'),
  F('table','餐桌（试排）',1600,2600,1300,750),
@@ -573,7 +573,7 @@ function defaultState(){
   return {furniture:defaultFurniture(), rooms, demolished:[], measures:[]};
 }
 
-const STORE = 'ruihan-100g-master-doors-v9';
+const STORE = 'ruihan-100g-opposed-corridor-doors-v10';
 function load(){
   try { const s = JSON.parse(localStorage.getItem(STORE)); if (s && Array.isArray(s.furniture)) return fixState(s); } catch(e) {}
   return null;
@@ -847,7 +847,7 @@ function renderDims(){
    ['kitchen','厨房 图二3050×1900','plan'],
    ['gbath','公卫 图二1850×1800','plan'],
    ['study','书房 实测2505×2434','measured'],
-   ['mbath','主卫 图二1650×2500','plan'],
+   ['mbath','主卫 图二1650×2500（模型待校）','plan'],
    ['living','客餐厅 图二5000×3950','plan'],
    ['hall','过道宽/转角待复尺','pending'],
    ['secondary','次卧 实测2778×2946','measured'],
@@ -872,8 +872,8 @@ function renderDims(){
  out+=segment(-1200,160,-300,160,'入户门900 模型','pending');
  out+=segment(-210,550,-210,0,'玄关北缩550 模型','pending',true);
  out+=tag(-420,1710,'靠厨房玄关柜350×1100','pending',113);
- out+=tag(7210,2870,'主卧北侧入门（靠过道尽端）','plan',120);
- out+=tag(9010,2830,'主卫南侧门通主卧','plan',120);
+ out+=tag(8800,2940,'主卧门：过道南侧','plan',120);
+ out+=tag(8800,1750,'主卫门：过道北侧','plan',120);
  out+=tag(460,7870,'阳台参考 4150×1350 mm（图三）','plan',140);
  out+=tag(2220,6570,'右侧墙垛/凹位','pending',123);
  out+=tag(-1130,6490,'左侧短墙','pending',120);
