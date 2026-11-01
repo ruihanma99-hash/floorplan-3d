@@ -7,7 +7,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="theme-color" content="#fffdf9">
-<title>100G · V16 图纸重建 · PAX / METOD 暂排</title>
+<title>100G · V17 图纸重建 · PAX / METOD 暂排</title>
 <style>
 :root{
   --bg:#f3efe7; --paper:#f7f4ee; --panel:#fffdf9; --line:#e3dccf; --ink:#2b2824; --muted:#8a8174;
@@ -228,7 +228,7 @@ main.drawer-panel #fab{opacity:0;visibility:hidden}
       <button class="btn chip" id="tgLib" data-en="◧ Library">◧ 家具库</button>
       <button class="btn chip" id="tgPanel" data-en="Properties ◨">属性 ◨</button>
     </div>
-    <div class="brand"><b data-en="3BR 2LR 2BA · Interior Design">100G · V16 图纸重建 · PAX / METOD 暂排</b><span id="subtitle">原始户型 1:60 · 尺寸单位 mm</span></div>
+    <div class="brand"><b data-en="3BR 2LR 2BA · Interior Design">100G · V17 图纸重建 · PAX / METOD 暂排</b><span id="subtitle">原始户型 1:60 · 尺寸单位 mm</span></div>
     <div class="grp seg" id="viewSeg" title="切换 2D / 3D (T)" data-en-title="Switch 2D / 3D (T)">
       <span class="pill"></span>
       <button class="btn" data-view="2d" data-en="2D Plan">2D 平面</button>
@@ -383,7 +383,7 @@ function applyStaticLang(){
   document.querySelectorAll('#langSel [data-lang]').forEach(b => { const on = b.dataset.lang === LANG; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on); });
 }
 
-// V16: source plan establishes orientation; mirrored handwritten photo supplies readable clear dimensions.
+// V17: source plan establishes orientation; mirrored handwritten photo supplies readable clear dimensions.
 // Wall thickness, offsets, passage width, door width and bay depth remain provisional.
 const WALLS=[
  // entrance, west outer wall (solid); door at north
@@ -403,15 +403,15 @@ const WALLS=[
  [7805,-650,7985,1784,'n'],
  [5300,1784,6000,1964,'n'],[6850,1784,7985,1964,'n'],
  // Suite passage x7985..8785. Bath extends below study, as in source plan.
- [7985,1604,8785,1784,'e'],[8785,104,8965,1964,'n'],[8785,2764,8965,2784,'n'],
+ [7985,1604,8785,1784,'e'],[8785,104,8965,2604,'n'],
  [8785,-76,9300,104,'e'],[10200,-76,10795,104,'e'],
- [10615,104,10795,6474,'e'],[8965,2604,10615,2784,'n'],
+ [10615,104,10795,6474,'e'],[9765,2604,10615,2784,'n'],
  // Secondary clear 2778×2946; entrance in northern wall.
  [3350,2600,3700,2780,'n'],[4500,2600,6488,2780,'n'],
  [3350,2780,3530,5726,'n'],[6308,2780,6488,5726,'n'],
  // Master clear 3130×3330. West vertical door leads from suite entrance.
  [7305,2784,7485,2964,'n'],[7305,3764,7485,6294,'n'],
- [7485,2784,10615,2964,'n'],
+ [7485,2784,8250,2964,'n'],[8250,2484,8430,2784,'n'],[8430,2484,8785,2664,'n'],[9765,2784,10615,2964,'n'],
  // Window returns and exterior glazing are at the OUTER edge of each bay.
  [3350,5726,3910,5906,'e'],[5770,5726,6488,5906,'e'],
  [3730,5726,3910,6336,'e'],[5770,5726,5950,6336,'e'],
@@ -444,7 +444,7 @@ const DOORS=[
  {name:'书房门（暂定850）',rect:[6000,1784,6850,1964],h:[6000,1784],c:[1,0],o:[0,-1],len:850},
  {name:'次卧门：北墙西端合页，向内开（宽暂定800）',rect:[3700,2600,4500,2780],h:[3700,2780],c:[1,0],o:[0,1],len:800},
  {name:'主卧门：竖墙上端合页，逆时针内开（宽暂定800）',rect:[7305,2964,7485,3764],h:[7485,2964],c:[0,1],o:[1,0],len:800},
- {name:'主卫门：竖墙下端合页，向卫内开（宽暂定800）',rect:[8785,1964,8965,2764],h:[8965,2764],c:[0,-1],o:[1,0],len:800}
+ {name:'主卫门：按镜像PDF校正为南侧横墙门洞，向北内开（宽暂定800）',rect:[8965,2604,9765,2784],h:[8965,2604],c:[1,0],o:[0,-1],len:800}
 ];
 const SLIDES=[{rect:[900,1900,2350,2080],v:false}];
 const R=(x0,y0,x1,y1)=>[[x0,y0],[x1,y0],[x1,y1],[x0,y1]];
@@ -455,9 +455,9 @@ const ROOMS=[
  {id:'study',name:'书房',poly:R(5300,-650,7805,1784),mat:'wood',at:[6500,300]},
  {id:'mbath',name:'主卫',poly:R(8965,104,10615,2604),mat:'antislip',at:[9780,1200]},
  {id:'living',name:'客餐厅',poly:R(-1450,2080,3350,6100),mat:'tile800',at:[900,3950]},
- {id:'hall',name:'过道 / 主卧套间入口（宽度暂定）',poly:[[3350,2080],[5140,2080],[5140,1964],[7985,1964],[7985,1784],[8785,1784],[8785,2784],[7305,2784],[7305,3764],[6488,3764],[6488,2600],[3350,2600]],mat:'tile800',at:[8000,2350]},
+ {id:'hall',name:'过道 / 主卧套间入口（宽度暂定）',poly:[[3350,2080],[5140,2080],[5140,1964],[7985,1964],[7985,1784],[8785,1784],[8785,2784],[8430,2784],[8430,2484],[8250,2484],[8250,2784],[7305,2784],[7305,3764],[6488,3764],[6488,2600],[3350,2600]],mat:'tile800',at:[8000,2350]},
  {id:'secondary',name:'次卧',poly:R(3530,2780,6308,5726),mat:'wood',at:[4900,4200]},
- {id:'master',name:'主卧',poly:R(7485,2964,10615,6294),mat:'wood',at:[9050,4500]},
+ {id:'master',name:'主卧',poly:[[7485,2964],[8430,2964],[8430,2784],[9765,2784],[9765,2964],[10615,2964],[10615,6294],[7485,6294]],mat:'wood',at:[9050,4500]},
  {id:'balcony',name:'阳台（墙垛暂定）',poly:[[-1450,6100],[2220,6100],[2220,6460],[2500,6460],[2500,7450],[-1450,7450]],mat:'tile800',at:[400,6790]},
  {id:'bay-study',name:'书房飘窗（宽深暂定）',poly:R(5700,-1130,7410,-650),mat:'marble',counted:false},
  {id:'bay-secondary',name:'次卧飘窗（手写W1860 H760；深暂定610）',poly:R(3910,5726,5770,6336),mat:'marble',counted:false},
@@ -551,7 +551,7 @@ function defaultState(){
   return {furniture:defaultFurniture(), rooms, demolished:[], measures:[]};
 }
 
-const STORE = 'ruihan-100g-v16-source-rebuild';
+const STORE = 'ruihan-100g-v17-pdf-entry';
 function load(){
   try { const s = JSON.parse(localStorage.getItem(STORE)); if (s && Array.isArray(s.furniture)) return fixState(s); } catch(e) {}
   return null;
@@ -805,8 +805,8 @@ function renderLabels(){
 function renderDims(){
  const source={study:'手写净尺寸2505×2434',secondary:'手写净尺寸2778×2946',master:'手写净尺寸3130×3330',mbath:'参考图净尺寸1650×2500'};
  let out=ROOMS.map(r=>{const [x0,y0,x1,y1]=bbox(r.poly);const label=source[r.id]||'模型尺寸暂定 '+(x1-x0)+'×'+(y1-y0);return `<text x="${(x0+x1)/2}" y="${y1-100}" font-size="110" text-anchor="middle" fill="${source[r.id]?'#247a65':'#ac6a3d'}" stroke="#fffdf8" stroke-width="25" paint-order="stroke">${esc(label)}</text>`;}).join('');
- out+='<text x="4800" y="8100" font-size="140" text-anchor="middle" fill="#ac6a3d">V16：墙厚、门宽、过道、墙垛及飘窗进深均暂定；绿色为图纸可读净尺寸。</text>';
- out+='<text x="4800" y="8360" font-size="130" text-anchor="middle" fill="#ac6a3d">PAX / METOD 为柜体模数；门板、台面、踢脚与收口另计，尚未复尺定单。</text>';
+ out+='<text x="4800" y="8100" font-size="140" text-anchor="middle" fill="#ac6a3d">V17：主卫横墙门洞依镜像PDF；入口短墙、转折净宽和门宽暂定。</text>';
+ out+='<text x="4800" y="8360" font-size="130" text-anchor="middle" fill="#ac6a3d">PDF标注1729/1424/1816为墙段或柜位尺寸，不能用作过道净宽；柜体仍为暂排。</text>';
  $('#gDims').innerHTML=out;$('#gDims').setAttribute('display',ui.layers.dims?'inline':'none');
 }
 
@@ -865,7 +865,7 @@ function renderAll(){
 
 function updateHeader(){
   const tot = ROOMS.filter(r => r.counted !== false).reduce((a,r) => a + area(r.poly), 0);
-  $('#subtitle').textContent = tr(`V16 原图＋手写尺寸校准 · 墙厚/门宽/过道暂定 · 模型面积 ${fmt(tot)} m²（非实测） · 单位mm`, `Draft model area ${fmt(tot)} m² (not measured) · Units: mm`);
+  $('#subtitle').textContent = tr(`V17 原图＋手写尺寸校准 · 墙厚/门宽/过道暂定 · 模型面积 ${fmt(tot)} m²（非实测） · 单位mm`, `Draft model area ${fmt(tot)} m² (not measured) · Units: mm`);
   $('#undo').disabled = !undoStack.length; $('#redo').disabled = !redoStack.length;
   $('#undo').style.opacity = undoStack.length ? 1 : .4; $('#redo').style.opacity = redoStack.length ? 1 : .4;
 }
