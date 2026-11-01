@@ -383,33 +383,8 @@ function applyStaticLang(){
   document.querySelectorAll('#langSel [data-lang]').forEach(b => { const on = b.dataset.lang === LANG; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on); });
 }
 
-/* ============================================================
- *  户型数据（单位 mm，原点 = 左侧外墙内皮 / 顶部外墙内皮）
- *  所有数值均按原始户型图尺寸标注推算：
- *  上：1580/240/2760/240/1540/240/3670 = 10270
- *  下：2180/240/2160/240/5450/240/1340 = 11850
- *  左：3370/1580/240/2770/240/2360 = 10560
- *  右：3370/240/2760/240/3950 = 10560
- * ============================================================ */
-// 100㎡三房两卫 | 2026-11-01 手绘图复原第一版（待复尺）
-// 图纸已做左右镜像校正；单位 mm。此版本用于空间拓扑校核，不作施工放样。
-// 由于相片折痕与标注重叠，未确认墙位、门洞、墙厚为可调整的临时取值。
-// x 左→右：客厅/厨房 → 主卧/客卫 → 次卧/入户；y 上→下：厨房/玄关 → 卧室/客厅。
-// 依据可靠的记录：书房2505×2434、主卧3130×3330、次卧2778×2946。
-// 房间之间以独立走道连通，门洞位置暂估；外墙不代表实际承重鉴定。
-// V4：结构拓扑以用户提供的“全屋平面 100英寸电视与柜体尺寸 /06”（图二）为准。
-// 图一是镜像的手写实测图：用于确认净尺寸，不用于直接确定左右方向。
-// 坐标：毫米；北/上为厨房/卫生间，南/下为客厅、次卧、主卧及阳台。
-// 房间尺寸是“图二标注的方案净尺寸”；手写图中不清楚的墙厚与门洞偏移仍待校核。
-// 绝不将本版平面作为施工放样或建筑面积依据。
-// V5: 图二为平面拓扑，图一镜像手写仅供净尺寸核对。x东/y南，单位mm。
-// 所有墙体承重性质暂未获结构图证实，不以颜色或厚度冒充承重认定。
-// V6: corrected against image 1 (mirrored measured diagram) AND image 2 (right-handed plan).
-// Confirmed orientation: entrance on NORTH; western living wall SOLID; kitchen/public bath/study/ensuite
-// across northern wing; secondary bedroom center-south, master east-south; balcony SW not full width.
-// Reference: study structurally adjoins public bathroom and corridor; no detached northern island.
-// Units mm. Wall pier positions are provisional unless clearly visible in the user's two drawings.
-// No bearing classification ('b') is asserted without an actual structural plan.
+// V16: source plan establishes orientation; mirrored handwritten photo supplies readable clear dimensions.
+// Wall thickness, offsets, passage width, door width and bay depth remain provisional.
 const WALLS=[
  // entrance, west outer wall (solid); door at north
  [-1650,370,-1200,550,'e'],[-300,370,0,550,'e'],
@@ -564,7 +539,7 @@ function defaultFurniture(){
  other('sofa','沙发',-300,4450,2300,900,90),other('table','餐桌',1350,2900,1300,750),
  other('chair','餐椅',1350,2300,450,480),other('chair','餐椅',1350,3500,450,480),
  metod('家政高柜（干区）',-1100,6800,600,600,2000,90),
- other('washer','洗衣机，独立位',-800,6500,600,600),
+ other('washer','洗衣机，独立位',-750,6500,600,600),
  other('shower','公卫淋浴',3900,510,800,800),other('toilet','公卫马桶',4670,1150,400,700),
  other('vanity','公卫浴室柜（湿区）',3890,1660,650,400),
  other('shower','主卫淋浴',10120,600,900,900),other('toilet','主卫马桶',10240,1500,400,700),
