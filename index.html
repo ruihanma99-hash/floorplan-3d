@@ -7,7 +7,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="theme-color" content="#fffdf9">
-<title>100G · V15 对照原图修正门扇合页与开向</title>
+<title>100G · V16 图纸重建 · PAX / METOD 暂排</title>
 <style>
 :root{
   --bg:#f3efe7; --paper:#f7f4ee; --panel:#fffdf9; --line:#e3dccf; --ink:#2b2824; --muted:#8a8174;
@@ -228,7 +228,7 @@ main.drawer-panel #fab{opacity:0;visibility:hidden}
       <button class="btn chip" id="tgLib" data-en="◧ Library">◧ 家具库</button>
       <button class="btn chip" id="tgPanel" data-en="Properties ◨">属性 ◨</button>
     </div>
-    <div class="brand"><b data-en="3BR 2LR 2BA · Interior Design">100G · V15 原图门扇合页及开启方向</b><span id="subtitle">原始户型 1:60 · 尺寸单位 mm</span></div>
+    <div class="brand"><b data-en="3BR 2LR 2BA · Interior Design">100G · V16 图纸重建 · PAX / METOD 暂排</b><span id="subtitle">原始户型 1:60 · 尺寸单位 mm</span></div>
     <div class="grp seg" id="viewSeg" title="切换 2D / 3D (T)" data-en-title="Switch 2D / 3D (T)">
       <span class="pill"></span>
       <button class="btn" data-view="2d" data-en="2D Plan">2D 平面</button>
@@ -422,34 +422,26 @@ const WALLS=[
  [3290,-180,3750,0,'e'],[4630,-180,5140,0,'e'],
  [3290,0,3470,1900,'n'],[4960,0,5140,1900,'n'],
  [3290,1900,4140,2080,'n'],[4920,1900,5140,2080,'n'],
- // study adjacent to the public bath: west wall x5140-5300, north balcony/terrace sill; south door
- [5140,-650,5300,1900,'n'],
- [5140,-830,5510,-650,'e'],[7210,-830,7900,-650,'e'],
- [5510,-1130,5690,-650,'n'],[7030,-1130,7210,-650,'n'],
- [7720,-650,7900,1900,'n'],
- [5300,1900,6000,2080,'n'],[6850,1900,7900,2080,'n'],
- // bath-to-study corner/post; DO NOT create a 1m empty buffer
- [4960,1720,5300,1900,'n'],
- // ensuite on study east side, master directly underneath
- [7900,-180,8310,0,'e'],[9210,-180,9730,0,'e'],
- [7900,0,8080,1040,'n'],[7900,1840,8080,1900,'n'],[9550,0,9730,5900,'e'], // 主卫西侧竖墙留800门洞
- [8080,1900,9550,2080,'n'], // 封闭此前错误的主卫南侧横向门洞
- // 按原始开发商图修正门扇铰点：主卧西侧竖墙上端为合页，次卧北墙西端为合页；主卫西侧竖墙下端为合页。主卫门外套间通道需单独校核，不得误认为可穿书房。
- [3350,2600,3980,2780,'n'],[4780,2600,6300,2780,'n'],
- [3350,2600,3530,5700,'n'],[6300,3900,6480,5700,'n'], // 打通通向主卧西侧门的上段过道，避免墙挡住门
- [6550,2680,6730,3100,'n'],[6550,3900,6730,5900,'n'], // 主卧门西侧竖墙800mm洞，向东内开
- [6730,2500,9550,2680,'n'], // 主卧北墙完整，移除V10误设门洞
- // SOUTH WALLS of both bedrooms: window recesses plus visible protruding structural piers
- [3350,5700,3740,5880,'e'],[5630,5700,6300,5880,'e'],
- [6550,5900,7010,6080,'e'],[8700,5900,9730,6080,'e'],
- [3320,5580,3630,5900,'n'], // second-bedroom window WEST pier (tentative)
- [6100,5550,6480,5900,'n'], // intermediate pier between bedrooms (tentative)
- [6490,5740,6750,6080,'n'], // recess/step between two bay windows (tentative)
- [9480,5620,9730,6080,'n'], // master window EAST pier (tentative)
- [3710,5700,3890,5930,'n'], // second-bedroom window return
- [5520,5700,5700,5930,'n'], // second-bedroom other return
- [6930,5900,7140,6120,'n'], // master window return
- [8600,5900,8830,6120,'n'], // master window other return
+ // East wing: clear study 2505×2434; a separate suite passage east of study.
+ [5140,-650,5300,1784,'n'],[5300,-830,5700,-650,'e'],[7410,-830,7985,-650,'e'],
+ [5700,-1130,5880,-650,'e'],[7230,-1130,7410,-650,'e'],
+ [7805,-650,7985,1784,'n'],
+ [5300,1784,6000,1964,'n'],[6850,1784,7985,1964,'n'],
+ // Suite passage x7985..8785. Bath extends below study, as in source plan.
+ [7985,1604,8785,1784,'e'],[8785,104,8965,1964,'n'],[8785,2764,8965,2784,'n'],
+ [8785,-76,9300,104,'e'],[10200,-76,10795,104,'e'],
+ [10615,104,10795,6474,'e'],[8965,2604,10615,2784,'n'],
+ // Secondary clear 2778×2946; entrance in northern wall.
+ [3350,2600,3700,2780,'n'],[4500,2600,6488,2780,'n'],
+ [3350,2780,3530,5726,'n'],[6308,2780,6488,5726,'n'],
+ // Master clear 3130×3330. West vertical door leads from suite entrance.
+ [7305,2784,7485,2964,'n'],[7305,3764,7485,6294,'n'],
+ [7485,2784,10615,2964,'n'],
+ // Window returns and exterior glazing are at the OUTER edge of each bay.
+ [3350,5726,3910,5906,'e'],[5770,5726,6488,5906,'e'],
+ [3730,5726,3910,6336,'e'],[5770,5726,5950,6336,'e'],
+ [7305,6294,7815,6474,'e'],[9475,6294,10795,6474,'e'],
+ [7635,6294,7815,6854,'e'],[9475,6294,9655,6854,'e'],
  // west side TV wall terminates in a pier rather than blocking corridor
  [3150,4000,3350,5700,'n'],
  [3150,4000,3350,4330,'n'],
@@ -466,22 +458,18 @@ const WALLS=[
  [2260,5960,2700,6080,'n'] // interior stub at balcony right entrance
 ];
 const WINS=[
- [1050,-180,2520,0], // kitchen northern external glazing
- [3750,-180,4630,0], // public bathroom exterior
- [5690,-1130,7030,-950], // study north bay window
- [8310,-180,9210,0], // ensuite exterior
- // bay windows have their own outward projection (not flat wall glass)
- [3740,5700,5630,5880], // secondary
- [7010,5900,8700,6080], // master
- [-1130,7450,2320,7630] // SOUTH external balcony glazing; west wall is fully solid
+ [1050,-180,2520,0],[3750,-180,4630,0],
+ [5880,-1130,7230,-950],[9300,-76,10200,104],
+ [3910,6156,5770,6336],[7815,6674,9475,6854],
+ [-1130,7450,2320,7630]
 ];
 const DOORS=[
- {name:'北侧入户门',rect:[-1200,370,-300,550],h:[-1200,550],c:[1,0],o:[0,1],len:900,entry:true},
- {name:'公卫门（待复尺）',rect:[4140,1900,4920,2080],h:[4140,1900],c:[1,0],o:[0,1],len:780},
- {name:'书房门（待复尺）',rect:[6000,1900,6850,2080],h:[6000,1900],c:[1,0],o:[0,1],len:850},
- {name:'次卧门（北墙左端铰链，向卧室内开）',rect:[3980,2600,4780,2780],h:[3980,2780],c:[1,0],o:[0,1],len:800},
- {name:'主卧门（西侧竖墙上端铰链，向东内开）',rect:[6550,3100,6730,3900],h:[6730,3100],c:[0,1],o:[1,0],len:800},
- {name:'主卫门（西侧竖墙下端铰链，向东内开；门外通道待核）',rect:[7900,1040,8080,1840],h:[8080,1840],c:[0,-1],o:[1,0],len:800}
+ {name:'北侧入户门（宽暂定）',rect:[-1200,370,-300,550],h:[-1200,550],c:[1,0],o:[0,1],len:900,entry:true},
+ {name:'公卫门（暂定780）',rect:[4140,1900,4920,2080],h:[4140,1900],c:[1,0],o:[0,1],len:780},
+ {name:'书房门（暂定850）',rect:[6000,1784,6850,1964],h:[6000,1784],c:[1,0],o:[0,-1],len:850},
+ {name:'次卧门：北墙西端合页，向内开（宽暂定800）',rect:[3700,2600,4500,2780],h:[3700,2780],c:[1,0],o:[0,1],len:800},
+ {name:'主卧门：竖墙上端合页，逆时针内开（宽暂定800）',rect:[7305,2964,7485,3764],h:[7485,2964],c:[0,1],o:[1,0],len:800},
+ {name:'主卫门：竖墙下端合页，向卫内开（宽暂定800）',rect:[8785,1964,8965,2764],h:[8965,2764],c:[0,-1],o:[1,0],len:800}
 ];
 const SLIDES=[{rect:[900,1900,2350,2080],v:false}];
 const R=(x0,y0,x1,y1)=>[[x0,y0],[x1,y0],[x1,y1],[x0,y1]];
@@ -489,16 +477,16 @@ const ROOMS=[
  {id:'entry',name:'北侧玄关',poly:R(-1450,550,0,1900),mat:'tile800',at:[-730,1130]},
  {id:'kitchen',name:'厨房',poly:R(180,0,3050,1900),mat:'tile600',at:[1520,920]},
  {id:'gbath',name:'公卫',poly:R(3470,0,4960,1900),mat:'antislip',at:[4180,920]},
- {id:'study',name:'书房/衣帽间',poly:R(5300,-650,7720,1900),mat:'wood',at:[6440,220]},
- {id:'mbath',name:'主卫',poly:R(8080,0,9550,1900),mat:'antislip',at:[8820,850]},
+ {id:'study',name:'书房',poly:R(5300,-650,7805,1784),mat:'wood',at:[6500,300]},
+ {id:'mbath',name:'主卫',poly:R(8965,104,10615,2604),mat:'antislip',at:[9780,1200]},
  {id:'living',name:'客餐厅',poly:R(-1450,2080,3350,6100),mat:'tile800',at:[900,3950]},
- {id:'hall',name:'东西向过道及主卧西侧入口',poly:[[3350,2080],[5140,2080],[5140,1900],[9550,1900],[9550,2500],[6730,2500],[6730,3900],[6300,3900],[6300,2600],[3350,2600]],mat:'tile800',at:[6990,2230]},
- {id:'secondary',name:'次卧',poly:R(3530,2780,6300,5700),mat:'wood',at:[4870,3940]},
- {id:'master',name:'主卧',poly:R(6730,2680,9550,5900),mat:'wood',at:[8260,4050]},
- {id:'balcony',name:'原阳台（右侧保留墙垛）',poly:[[-1450,6100],[2220,6100],[2220,6460],[2500,6460],[2500,7450],[-1450,7450]],mat:'tile800',at:[400,6790]},
- {id:'bay-study',name:'书房北侧飘窗（待复尺）',poly:R(5510,-1130,7210,-650),mat:'marble',counted:false},
- {id:'bay-secondary',name:'次卧飘窗（深约600待核）',poly:R(3740,5700,5630,6300),mat:'marble',counted:false},
- {id:'bay-master',name:'主卧飘窗（深约570待核）',poly:R(7010,5900,8700,6470),mat:'marble',counted:false}
+ {id:'hall',name:'过道 / 主卧套间入口（宽度暂定）',poly:[[3350,2080],[5140,2080],[5140,1964],[7985,1964],[7985,1784],[8785,1784],[8785,2784],[7305,2784],[7305,3764],[6488,3764],[6488,2600],[3350,2600]],mat:'tile800',at:[8000,2350]},
+ {id:'secondary',name:'次卧',poly:R(3530,2780,6308,5726),mat:'wood',at:[4900,4200]},
+ {id:'master',name:'主卧',poly:R(7485,2964,10615,6294),mat:'wood',at:[9050,4500]},
+ {id:'balcony',name:'阳台（墙垛暂定）',poly:[[-1450,6100],[2220,6100],[2220,6460],[2500,6460],[2500,7450],[-1450,7450]],mat:'tile800',at:[400,6790]},
+ {id:'bay-study',name:'书房飘窗（宽深暂定）',poly:R(5700,-1130,7410,-650),mat:'marble',counted:false},
+ {id:'bay-secondary',name:'次卧飘窗（手写W1860 H760；深暂定610）',poly:R(3910,5726,5770,6336),mat:'marble',counted:false},
+ {id:'bay-master',name:'主卧飘窗（手写W1660 H760；深暂定560）',poly:R(7815,6294,9475,6854),mat:'marble',counted:false}
 ];
 const MATS = {
   wood:    {name:'橡木地板', price:320, sw:'#d8b88a'},
@@ -540,6 +528,8 @@ const LIB = [
     ['desk','长书桌',1600,700,'#d8c2a2'],['officechair','办公椅',620,620,'#4a4f55'],['bookshelf','大书架',1600,350,'#e2cfb4'],
     ['piano','立式钢琴',1500,600,'#1f1d1b'],['treadmill','跑步机',800,1800,'#3a3a3c'],['armchair','阅读椅',750,800,'#c9a98a']]},
 ];
+for (const c of LIB) for (const item of c.items) item[1] = '非PAX/METOD · '+item[1];
+LIB.unshift({cat:'PAX / METOD 标准柜体',items:[['wardrobe','PAX 50×58',500,580,'#efe6d8'],['wardrobe','PAX 75×58',750,580,'#efe6d8'],['wardrobe','PAX 100×58',1000,580,'#efe6d8'],['cabinet','METOD 底柜60×60',600,600,'#efe6d8'],['cabinet','METOD 底柜80×60',800,600,'#efe6d8'],['cabinet','METOD 壁柜60×37',600,370,'#efe6d8']]});
 const typeColor = t => { for (const c of LIB) for (const i of c.items) if (i[0]===t) return i[4]; return '#eee'; };
 
 let _n = 1;
@@ -547,35 +537,46 @@ const uid = () => 'f' + Date.now().toString(36) + (_n++);
 const F = (type,name,cx,cy,w,d,rot=0,color) => ({id:uid(),type,name,cx,cy,w,d,rot,color:color||typeColor(type)});
 
 // 家具为初步摆位，不是采购或加工尺寸；家具边界应在交付后复尺校核。
-function defaultFurniture(){return [
- F('shoecab','玄关靠厨房侧柜（暂排）',-210,1200,350,1100,0,'#f4f0ea'),
- F('counter','厨房台面',1500,350,2400,600),F('stove','灶台',2250,300,700,450),
- F('ksink','厨房水槽',850,300,750,450),F('fridge','双开门冰箱',450,1350,830,690),
- F('shower','公卫淋浴',3900,510,900,900),F('toilet','公卫马桶',4670,1150,400,700),
- F('vanity','公卫洗手台',3950,1690,650,400),
- F('wardrobe','书房衣柜1450×550',5575,950,550,1450),
- F('desk','书房升降桌1000×600',6470,-220,1000,600),
- F('sofa','书房沙发床（收起）',7250,870,910,1800,0,'#d9d5d0'),
- F('shower','主卫淋浴',8780,600,900,900),
- F('toilet','主卫马桶',9330,1190,400,650),
- F('vanity','主卫洗手台',8380,1490,650,450),
- F('tvstand','100寸电视墙/柜（试排）',3100,4450,450,2750,90),
- F('sofa','三人电动沙发（试排）',500,4250,2450,950,90,'#d6d4d0'),
- F('table','餐桌（试排）',1600,2600,1300,750),
- F('chair','餐椅',900,2600,450,450),F('chair','餐椅',2270,2600,450,450),
- F('cabinet','阳台家政柜',-1100,6650,550,1100),
- F('bed','次卧床1850×2050',4750,4520,1850,2050),
- F('wardrobe','次卧衣柜1800×550',5300,3120,1800,550),
- F('bed','主卧床1850×2050',8200,4700,1850,2050),
- F('wardrobe','主卧衣柜1700×600',7400,3080,1700,600),
- F('nightstand','床头柜',9330,3810,350,350)
-];}
+// Each frame is an individual module; dimensions are frame dimensions, excluding fronts/fillers.
+function defaultFurniture(){
+ const frame=(series,type,name,x,y,w,d,height,rot=0)=>Object.assign(F(type,series+' '+name,x,y,w,d,rot),{series,height});
+ const pax=(x,y,w,rot=0)=>frame('PAX','wardrobe','框架 '+w+'×580×2364',x,y,w,580,2364,rot);
+ const metod=(name,x,y,w,d=600,height=800,rot=0)=>frame('METOD','cabinet',name+' '+w+'×'+d+'×'+height,x,y,w,d,height,rot);
+ const other=(...args)=>{const f=F(...args);f.name='非PAX/METOD · '+f.name;return f;};
+ return [
+ metod('玄关高柜（固定及开门待核）',-310,1150,600,600,2000,90),
+ metod('厨房水槽底柜',700,350,800),metod('厨房抽屉底柜',1400,350,600),
+ metod('厨房灶具底柜',2100,350,800),metod('厨房窄底柜',2700,350,400),
+ other('ksink','水槽/台面另配',700,350,700,450),other('stove','灶具',2100,350,650,450),
+ other('fridge','冰箱',650,1400,700,700),
+ pax(5600,300,750,90),pax(5600,1050,750,90),
+ other('desk','书桌',6910,-250,1100,600),other('chair','书房椅',6900,400,450,480),
+ pax(5000,3100,750),pax(5750,3100,750),
+ other('bed','次卧床1500×2000',4700,4660,1500,2000),
+ pax(9200,3304,1000),pax(10075,3304,750),
+ other('bed','主卧床1800×2000',9050,5140,1800,2000),
+ other('nightstand','床头柜',10200,4300,350,350),
+ metod('电视餐边柜模块',2920,4200,600,370,800,90),
+ metod('电视餐边柜模块',2920,4800,600,370,800,90),
+ metod('电视餐边柜模块',2920,5400,600,370,800,90),
+ metod('餐边储物模块',2920,3000,600,370,800,90),
+ other('tv','电视（安装尺寸待选型）',3100,4800,80,2200),
+ other('sofa','沙发',-300,4450,2300,900,90),other('table','餐桌',1350,2900,1300,750),
+ other('chair','餐椅',1350,2300,450,480),other('chair','餐椅',1350,3500,450,480),
+ metod('家政高柜（干区）',-1100,6800,600,600,2000,90),
+ other('washer','洗衣机，独立位',-800,6500,600,600),
+ other('shower','公卫淋浴',3900,510,800,800),other('toilet','公卫马桶',4670,1150,400,700),
+ other('vanity','公卫浴室柜（湿区）',3890,1660,650,400),
+ other('shower','主卫淋浴',10120,600,900,900),other('toilet','主卫马桶',10240,1500,400,700),
+ other('vanity','主卫浴室柜（湿区）',10240,2300,650,450)
+ ];
+}
 function defaultState(){
   const rooms = {}; ROOMS.forEach(r => rooms[r.id] = {name:r.name, mat:r.mat});
   return {furniture:defaultFurniture(), rooms, demolished:[], measures:[]};
 }
 
-const STORE = 'ruihan-100g-original-door-swing-v15';
+const STORE = 'ruihan-100g-v16-source-rebuild';
 function load(){
   try { const s = JSON.parse(localStorage.getItem(STORE)); if (s && Array.isArray(s.furniture)) return fixState(s); } catch(e) {}
   return null;
@@ -591,7 +592,7 @@ const PX_MM = 25.4 / 96;                       // 1 CSS px = 0.2646 mm
 const COARSE = matchMedia('(pointer:coarse)').matches;   // iPad / 手机等触屏为主的设备
 const TAP = COARSE ? 9 : 4;                    // 手指按下后移动超过该像素才算拖动
 const narrow = () => matchMedia('(max-width:1100px)').matches;
-const BOUNDS = {x:-2450, y:-1600, w:13300, h:10500};
+const BOUNDS = {x:-2450, y:-1600, w:14500, h:10500};
 const $ = s => document.querySelector(s);
 const svg = $('#plan');
 
@@ -827,67 +828,11 @@ function renderLabels(){
 }
 
 function renderDims(){
- // 绿色：手写实测图/用户确认的净尺寸；灰色：图二方案尺寸；橙色：尚未复尺。
- const C={measured:'#247a65',plan:'#617188',pending:'#ac6a3d'};
- const escDim=t=>String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;');
- const tag=(x,y,label,kind='pending',size=138)=>{
-   return '<text x="'+x+'" y="'+y+'" text-anchor="middle" font-size="'+size+'" fill="'+C[kind]+'" stroke="#fffdf8" stroke-width="30" paint-order="stroke">'+escDim(label)+'</text>';
- };
- const segment=(x0,y0,x1,y1,label,kind='pending',vertical=false)=>{
-   const stroke='stroke="'+C[kind]+'" stroke-width="1" vector-effect="non-scaling-stroke"';
-   const cx=(x0+x1)/2,cy=(y0+y1)/2;
-   const ticks=vertical
-    ? '<path d="M'+(x0-70)+' '+y0+'h140 M'+(x1-70)+' '+y1+'h140" '+stroke+' fill="none"/>'
-    : '<path d="M'+x0+' '+(y0-70)+'v140 M'+x1+' '+(y1-70)+'v140" '+stroke+' fill="none"/>';
-   const lx=vertical?cx-105:cx,ly=vertical?cy:cy-95;
-   return '<line x1="'+x0+'" y1="'+y0+'" x2="'+x1+'" y2="'+y1+'" '+stroke+'/>'+ticks+tag(lx,ly,label,kind,125);
- };
- let out='';
- // Every modeled occupied space has a width/depth label; source measurements do not falsely claim model geometry matches.
- const entries=[
-   ['entry','玄关 模型1450×1350','pending'],
-   ['kitchen','厨房 图二3050×1900','plan'],
-   ['gbath','公卫 图二1850×1800','plan'],
-   ['study','书房 实测2505×2434','measured'],
-   ['mbath','主卫 图二1650×2500（模型待校）','plan'],
-   ['living','客餐厅 图二5000×3950','plan'],
-   ['hall','过道宽/转角待复尺','pending'],
-   ['secondary','次卧 实测2778×2946','measured'],
-   ['master','主卧 实测3130×3330','measured'],
-   ['balcony','原阳台 图二4150×1350','plan'],
-   ['bay-study','书房飘窗 模型1700×480 待复尺','pending'],
-   ['bay-secondary','次卧飘窗 深约600待复尺','pending'],
-   ['bay-master','主卧飘窗 深约570待复尺','pending']
- ];
- for(const [id,label,kind] of entries){
-  const r=ROOMS.find(r=>r.id===id); if(!r)continue;
-  const [x0,y0,x1,y1]=bbox(r.poly);
-  const x=(x0+x1)/2,y=(y0+y1)/2;
-  // Labels on diagram mostly along top / bottom of each space to avoid furniture blocks.
-  const yy=id==='hall'?y0+250:id.startsWith('bay-')?y1+270:y1-230;
-  out+=tag(x,yy,label,kind,id==='living'?140:120);
-  if(!id.startsWith('bay-')&&id!=='hall'){
-   out+=segment(x0,y0-160,x1,y0-160,'模型'+Math.round(x1-x0),'pending');
-   out+=segment(x1+170,y0,x1+170,y1,'模型'+Math.round(y1-y0),'pending',true);
-  }
- }
- // Northern entry recess vs kitchen, all doors and major wall offsets are additionally identified.
- out+=segment(-1200,160,-300,160,'入户门900 模型','pending');
- out+=segment(-210,550,-210,0,'玄关北缩550 模型','pending',true);
- out+=tag(-420,1710,'靠厨房玄关柜350×1100','pending',113);
- out+=tag(6810,4200,'主卧门：西侧竖墙 / 向东内开','measured',118);
- out+=tag(8370,1750,'主卫门：竖墙下端铰链 / 向东内开（套间通道待核）','pending',113);
- out+=tag(460,7870,'阳台参考 4150×1350 mm（图三）','plan',140);
- out+=tag(2220,6570,'右侧墙垛/凹位','pending',123);
- out+=tag(-1130,6490,'左侧短墙','pending',120);
- out+=tag(6420,-1410,'书房飘窗：模型深480mm，待复尺','pending',120);
- out+=tag(4620,6140,'次卧飘窗：深约600mm，待复尺','pending',115);
- out+=tag(7930,6490,'主卧飘窗：深约570mm，待复尺','pending',115);
- out+=tag(5100,7910,'原图墙垛宽度尚未可靠识别，灰色墙为位置示意','pending',133);
- out+=tag(470,8140,'左：实墙；阳台净尺寸与柱/墙垛待复尺','pending',150);
- out+=tag(5200,8470,'绿色=实测记录 蓝灰=图二方案 棕色=模型/待复尺；非施工放样','pending',144);
- $('#gDims').innerHTML=out;
- $('#gDims').setAttribute('display',ui.layers.dims?'inline':'none');
+ const source={study:'手写净尺寸2505×2434',secondary:'手写净尺寸2778×2946',master:'手写净尺寸3130×3330',mbath:'参考图净尺寸1650×2500'};
+ let out=ROOMS.map(r=>{const [x0,y0,x1,y1]=bbox(r.poly);const label=source[r.id]||'模型尺寸暂定 '+(x1-x0)+'×'+(y1-y0);return `<text x="${(x0+x1)/2}" y="${y1-100}" font-size="110" text-anchor="middle" fill="${source[r.id]?'#247a65':'#ac6a3d'}" stroke="#fffdf8" stroke-width="25" paint-order="stroke">${esc(label)}</text>`;}).join('');
+ out+='<text x="4800" y="8100" font-size="140" text-anchor="middle" fill="#ac6a3d">V16：墙厚、门宽、过道、墙垛及飘窗进深均暂定；绿色为图纸可读净尺寸。</text>';
+ out+='<text x="4800" y="8360" font-size="130" text-anchor="middle" fill="#ac6a3d">PAX / METOD 为柜体模数；门板、台面、踢脚与收口另计，尚未复尺定单。</text>';
+ $('#gDims').innerHTML=out;$('#gDims').setAttribute('display',ui.layers.dims?'inline':'none');
 }
 
 function renderGrid(){
@@ -945,7 +890,7 @@ function renderAll(){
 
 function updateHeader(){
   const tot = ROOMS.filter(r => r.counted !== false).reduce((a,r) => a + area(r.poly), 0);
-  $('#subtitle').textContent = tr(`V8 参照开发商户型图修正 · 模型面积 ${fmt(tot)} m²（非实测） · 单位mm`, `Draft model area ${fmt(tot)} m² (not measured) · Units: mm`);
+  $('#subtitle').textContent = tr(`V16 原图＋手写尺寸校准 · 墙厚/门宽/过道暂定 · 模型面积 ${fmt(tot)} m²（非实测） · 单位mm`, `Draft model area ${fmt(tot)} m² (not measured) · Units: mm`);
   $('#undo').disabled = !undoStack.length; $('#redo').disabled = !redoStack.length;
   $('#undo').style.opacity = undoStack.length ? 1 : .4; $('#redo').style.opacity = redoStack.length ? 1 : .4;
 }
@@ -1863,7 +1808,13 @@ const plate = (g, r, x, y, z) => g.add(lathe([[0, 0], [r*.6, 0], [r*.72, .008], 
 /* ======================= 家具模型（局部坐标：背面朝 -z） ======================= */
 function buildFurniture(f){
   const g = new THREE.Group(), w = M(f.w), d = M(f.d), c = f.color || '#ddd', bz = -d/2, R = rng(Math.round(f.w*7 + f.d*13 + f.cx + f.cy));
-  switch (f.type){
+  if (f.series){
+    const h=M(f.height), t=.018, cm=woodM(c);
+    g.add(box(t,h,d,cm,-w/2+t/2),box(t,h,d,cm,w/2-t/2),box(w-2*t,t,d,cm,0,0),box(w-2*t,t,d,cm,0,h-t),box(w-2*t,h,.006,cm,0,0,bz+.003));
+    const shelves=f.series==='PAX'?3:2;
+    for(let i=1;i<=shelves;i++)g.add(box(w-2*t,t,d-.02,cm,0,h*i/(shelves+1)));
+    fronts(g,-w/2,0,w,h,d/2,Math.max(1,Math.round(w/.5)),1,cm,'bar');
+  } else switch (f.type){
     case 'bed': {
       const fr = woodM('#8d7258'), fab = fabric(c), fh = .3, mt = .22, top = fh + mt, n = Math.max(3, Math.round(w/.28)), sw = (w - .04)/n;
       g.add(box(w - .12, .06, d - .14, '#4a3e33', 0, 0, .03), rbox(w, fh - .06, d - .08, fr, 0, .06, .04, .015));        // 内缩踢脚 + 床箱
@@ -1921,12 +1872,12 @@ function buildFurniture(f){
     case 'wardrobe': case 'cabinet': case 'shoecab': {
       const cm = mat(c, {roughness:.55}), fz = d/2 - .02;
       if (f.type === 'wardrobe'){
-        const h = 2.2, n = Math.max(1, Math.round(w/.5));
+        const h = f.height ? f.height/1000 : 2.2, n = Math.max(1, Math.round(w/.5));
         g.add(box(w - .02, .08, d - .06, '#4a4641', 0, 0, -.03), box(w, h - .08, d - .02, cm, 0, .08, -.01));
         fronts(g, -w/2, .08, w, h - .1, fz, n, 1, cm, 'bar', 1.05);
         g.add(box(w, .02, d - .02, darker(c, .9), 0, h - .02, -.01));
       } else if (f.type === 'shoecab'){
-        const h = 1.0, y0 = .16, n = Math.max(1, Math.round(w/.45));
+        const h = f.height ? f.height/1000 : 1.0, y0 = .08, n = Math.max(1, Math.round(w/.45));
         g.add(box(w, h - y0, d - .02, cm, 0, y0, -.01), box(w - .04, .01, .03, glowMat('#fff7e6', '#ffe9c4', .8), 0, y0 - .01, fz - .06));   // 悬空 + 底部灯带
         fronts(g, -w/2, y0, w, h - y0, fz, n, 1, cm, 'edge');
         g.add(rbox(w + .01, .025, d, woodM(darker(c, .8)), 0, h, 0, .006));
@@ -2369,7 +2320,7 @@ function buildArch(){
   const top = opt.cut;
   ROOMS.forEach(r => {
     const m = floorMat(state.rooms[r.id].mat), bay = r.counted === false;
-    const geo = bay ? new THREE.ExtrudeGeometry(shapeOf(r.poly), {depth:.45, bevelEnabled:false}) : new THREE.ShapeGeometry(shapeOf(r.poly));
+    const geo = bay ? new THREE.ExtrudeGeometry(shapeOf(r.poly), {depth:r.id === 'bay-study' ? .76 : .76, bevelEnabled:false}) : new THREE.ShapeGeometry(shapeOf(r.poly));
     geo.rotateX(-Math.PI/2);
     const fl = new THREE.Mesh(geo, bay ? [m, mat('#e9e4da')] : m);
     fl.receiveShadow = true; fl.userData.room = r.id;
@@ -2390,10 +2341,10 @@ function buildArch(){
     colliders.push([wx(w[0]), wz(w[1]), wx(w[2]), wz(w[3])]);
   });
   // 门洞、飘窗洞口上方过梁
-  [...DOORS.map(d => [d.rect, 2.1]), ...SLIDES.map(s => [s.rect, s.v ? 2.4 : 2.1]), [[10270,800,10510,2600], 2.4], [[10270,4260,10510,5740], 2.4]]
+  [...DOORS.map(d => [d.rect, 2.1]), ...SLIDES.map(s => [s.rect, s.v ? 2.4 : 2.1])]
     .forEach(([r, h]) => { if (top > h) wallBox(r, h, top); });
   WINS.forEach((r, i) => {
-    const sill = i === 0 ? 1.4 : i >= 6 ? .45 : .9, head = 2.4;
+    const sill = i === 0 ? 1.4 : [2,4,5].includes(i) ? .76 : i === 6 ? .05 : .9, head = 2.4;
     wallBox(r, 0, Math.min(sill, top)); if (top > head) wallBox(r, head, top);
     colliders.push([wx(r[0]), wz(r[1]), wx(r[2]), wz(r[3])]);
     const gTop = Math.min(head, top); if (gTop <= sill) return;
